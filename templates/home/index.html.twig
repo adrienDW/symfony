@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}I Love Gamer{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>I Love Gamer Recherche</h1>
+
+   
+    {{ form_start(formSearch)}}
+        {{ form_row(formSearch.game) }}
+        <button type="submit" class="btn btn-lg btn-primary" {{ path('app_home')}}>Valider</button>
+    {{ form_end(formSearch)}}
+
+    
+    {% if connexion == 1 %}
+        <h2>Vos jeux favoris</h2>
+        {% for game in games %}
+
+        <div class="container text-center">           
+            <div class="card" style="width: 18rem;">
+                <img src="{{ game.imgGame}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ game.Name }}</h5>
+                    <p class="card-text">Plateforme : {{ game.platform }}</p>
+                    <p class="card-text">Date de sortie : {{ game.releaseDate }}</p>
+                    <a href="./del/{{ game.id }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock %}
